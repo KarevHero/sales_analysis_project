@@ -1,7 +1,7 @@
 import pandas as pd
 
-def conversion(file_path, start_row=11):
-    df = pd.read_excel(file_path, skiprows=start_row, engine='xlrd')
+def conversion(file_path, start_row=10):
+    df = pd.read_excel(file_path, skiprows=start_row, usecols='B:F', engine='xlrd')
 
     df.columns = ["Product name", "Product code", "Product group", "Sales quantity", "Sales amount in USD"]
 
@@ -16,6 +16,7 @@ def conversion(file_path, start_row=11):
         try:
             parse_date = pd.to_datetime(name, format="%d.%m.%Y", errors="raise")
             curent_date = parse_date
+            print(curent_date)
 
         except Exception:
             df.at[i, "Date of sale"] = curent_date
